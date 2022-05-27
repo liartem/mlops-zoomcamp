@@ -26,10 +26,12 @@ def run(data_path, num_trials):
     def objective(params):
 
         rf = RandomForestRegressor(**params)
+        #mlflow.log_param(max_depth)
+
         rf.fit(X_train, y_train)
         y_pred = rf.predict(X_valid)
         rmse = mean_squared_error(y_valid, y_pred, squared=False)
-
+        mlflow.log_metric("rmse", rmse)
         return {'loss': rmse, 'status': STATUS_OK}
 
     search_space = {
@@ -56,7 +58,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--data_path",
-        default="./output",
+        default="./homework/output",
         help="the location where the processed NYC taxi trip data was saved."
     )
     parser.add_argument(
