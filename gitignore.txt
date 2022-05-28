@@ -1,0 +1,4 @@
+*.log
+
+
+.\mlops-zoomcamp\week 1\.ipynb_checkpoints
