@@ -24,15 +24,18 @@ def run(data_path, num_trials):
     X_valid, y_valid = load_pickle(os.path.join(data_path, "valid.pkl"))
 
     def objective(params):
+        with mlflow.start_run(nested=True):
+            rf = RandomForestRegressor(**params)
+            mlflow.log_param("max_depth" , rf.max_depth)
+            mlflow.log_param("n_estimators" , rf.n_estimators)
+            mlflow.log_param("min_samples_split" , rf.min_samples_split)
+            mlflow.log_param("min_samples_leaf" , rf.min_samples_leaf)
 
-        rf = RandomForestRegressor(**params)
-        #mlflow.log_param(max_depth)
-
-        rf.fit(X_train, y_train)
-        y_pred = rf.predict(X_valid)
-        rmse = mean_squared_error(y_valid, y_pred, squared=False)
-        mlflow.log_metric("rmse", rmse)
-        return {'loss': rmse, 'status': STATUS_OK}
+            rf.fit(X_train, y_train)
+            y_pred = rf.predict(X_valid)
+            rmse = mean_squared_error(y_valid, y_pred, squared=False)
+            mlflow.log_metric("rmse", rmse)
+            return {'loss': rmse, 'status': STATUS_OK}
 
     search_space = {
         'max_depth': scope.int(hp.quniform('max_depth', 1, 20, 1)),
