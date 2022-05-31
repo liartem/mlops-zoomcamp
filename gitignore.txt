@@ -1,5 +1,6 @@
 *.log
 
-
+#ipynb_checkpoints
+C:\Users\leear\Desktop\Python\mlops-zoomcamp\week 1\.ipynb_checkpoints
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
