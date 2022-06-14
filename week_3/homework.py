@@ -62,12 +62,17 @@ def run_model(df, categorical, dv, lr):
     return
 
 @task
-def get_paths(date = "2021-08-15"):
+def get_paths(date):
     if date is None:
-        date = datetime.date.fromtimestamp(time.time())
-    month = int(date[6])
-    train_path = "./data/fhv_tripdata_2021-06.parquet"
-    val_path = "./data/fhv_tripdata_2021-07.parquet"
+        date = datetime.datetime.today()
+        train_month = date.month-2
+        valid_month = date.month-1
+    else:
+        train_month =  int(date[6]) -2
+        valid_month =  int(date[6]) -1
+
+    train_path = str(f"./data/fhv_tripdata_2021-0{train_month}.parquet")
+    val_path = str(f"./data/fhv_tripdata_2021-0{valid_month}.parquet")
     return train_path, val_path
 
 @flow(task_runner=SequentialTaskRunner())
@@ -93,6 +98,27 @@ def main(date = "2021-08-15"):
 
     with mlflow.start_run():
 
-        mlflow.sklearn.log_model(lr, artifact_path="models", registered_model_name = date)
+        mlflow.sklearn.log_model(lr, artifact_path="models", registered_model_name = f"model-{date}")
+
+        with open(f"artifacts_local/dv-{date}.b", "wb") as f_out:
+            pickle.dump(dv, f_out)
+        mlflow.log_artifact(f"artifacts_local/dv-{date}.b", artifact_path="models")
+
+#deployment section
+from prefect.deployments import DeploymentSpec
+from prefect.orion.schemas.schedules import CronSchedule 
+from prefect.flow_runners import SubprocessFlowRunner
+from datetime import timedelta
+
+DeploymentSpec(
+    flow=main,
+    name="cron-schedule-deployment",
+    schedule=CronSchedule(
+        cron="0 9 15 * *",
+        timezone="Europe/Zurich"),
+    flow_runner=SubprocessFlowRunner(),
+    tags=["homework", "CronSchedule"]
+)
+
 
 main()
