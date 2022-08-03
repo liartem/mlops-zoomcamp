@@ -1,11 +1,11 @@
 import requests
 
-event = {
+object = {
         "Gender": "Male",
-        "Age": 30,
-        "AnnualSalary": 100000,
+        "Age": 20,
+        "AnnualSalary": 1000,
         }
 
 url = 'http://localhost:9696/predict'
-response = requests.post(url, json=event)
+response = requests.post(url, json=object)
 print(response.json())
