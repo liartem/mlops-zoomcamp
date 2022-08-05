@@ -15,19 +15,21 @@ def predict(model, object):
     y_pred = model.predict(X)
     return float(y_pred)
 
-def make_label_encoding(object):
-    object = pd.DataFrame(object)
-    le = LabelEncoder()
-    object["Gender"] = le.fit_transform(object["Gender"])
-    return object.to_json()
+def make_encoding(object):
+    if list(object.items())[0][1] == "Male":
+        object["Gender"] = "1"
+    else:
+        object["Gender"] = "0"
+    return object
 
+    
 app = Flask("car-prediction")
 
 
 @app.route('/predict', methods=['POST'])
 def car_prediction():
     object = request.get_json()
-    #object = make_label_encoding(object)
+    object = make_encoding(object)
 
     pred = predict(model, object)
 
