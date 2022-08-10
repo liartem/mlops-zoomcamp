@@ -13,9 +13,6 @@ seaborn = "*"
 requests = "*"
 mlflow = "*"
 gunicorn = "*"
-pyarrow = "*"
-evidently = "*"
-pymongo = "*"
 
 [dev-packages]
 requests = "*"

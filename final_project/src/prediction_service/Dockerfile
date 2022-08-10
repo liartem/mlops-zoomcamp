@@ -5,9 +5,13 @@ RUN pip install pipenv
 
 WORKDIR /app
 
+COPY requirements.txt requirements.txt
+
 COPY [ "Pipfile" , "Pipfile.lock", "./"]
 
-RUN pipenv install --system --deploy
+RUN pip3 install -r requirements.txt
+
+RUN pip3 install evidently
 
 COPY ["predict.py", "rf.pkl", "./"]
 
