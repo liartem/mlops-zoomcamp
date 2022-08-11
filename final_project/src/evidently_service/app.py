@@ -201,9 +201,6 @@ def configure_service():
         logging.info(f"Load reference data for dataset {dataset_name} from {reference_file}")
         reference_data = pd.read_csv(reference_file)
 
-        #le = LabelEncoder()
-        #reference_data["Gender"] = le.fit_transform(reference_data["Gender"])
-
         datasets[dataset_name] = LoadedDataset(
             name=dataset_name,
             references=reference_data,

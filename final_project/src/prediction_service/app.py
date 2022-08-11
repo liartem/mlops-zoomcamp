@@ -33,18 +33,14 @@ def make_encoding(object):
 @app.route('/predict', methods=['POST'])
 def predict():
     object = request.get_json()
-    print(f"object obtained = {object}")
     object_enc = make_encoding(object)
-    print(f"object after encoding = {object_enc}")
 
     object_dv = dv.transform(object_enc)
 
-    print(f"object after dv = {object_dv}")
     pred = model.predict(object_dv)
     result = {
         'car-prediction': float(pred)
     }
-    print(f"object = {object}, pred = {pred}")
 
     save_to_db(object, float(pred))
     send_to_evidently_service(object, float(pred))

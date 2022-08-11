@@ -2,7 +2,7 @@ datasets:
   car:
     column_mapping:
       categorical_features:
-        # - 'Gender'
+        - 'Gender'
       numerical_features:
         - 'Age'
         - 'AnnualSalary'
@@ -11,8 +11,8 @@ datasets:
       separator: ','
     monitors:
       - data_drift
-      # - classification_performance
-      # - cat_target_drift
+      - classification_performance
+      - cat_target_drift
     reference_file: ./datasets/car_data.csv
 service:
   calculation_period_sec: 2
