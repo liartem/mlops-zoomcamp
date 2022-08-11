@@ -1,17 +1,21 @@
 datasets:
-  taxi:
+  car:
     column_mapping:
       categorical_features:
-        - 'Gender'
+        # - 'Gender'
       numerical_features:
         - 'Age'
         - 'AnnualSalary'
+      target: 
+        - 'Purchased'
     data_format:
       header: true
       separator: ','
     monitors:
-      - data_drift
-    reference_file: car_data.csv #./datasets/car_data.csv
+      # - data_drift
+      - classification_performance
+      - cat_target_drift
+    reference_file: ./datasets/car_data.csv
 service:
   calculation_period_sec: 2
   min_reference_size: 30

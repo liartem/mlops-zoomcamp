@@ -40,6 +40,7 @@ from evidently.model_monitoring import RegressionPerformanceMonitor
 from evidently.runner.loader import DataLoader
 from evidently.runner.loader import DataOptions
 
+from sklearn.preprocessing import LabelEncoder
 
 app = Flask(__name__)
 
@@ -198,7 +199,11 @@ def configure_service():
     for dataset_name, dataset_options in config["datasets"].items():
         reference_file = dataset_options['reference_file']
         logging.info(f"Load reference data for dataset {dataset_name} from {reference_file}")
-        reference_data = pq.read_table(reference_file).to_pandas()
+        reference_data = pd.read_csv(reference_file)
+
+        #le = LabelEncoder()
+        #reference_data["Gender"] = le.fit_transform(reference_data["Gender"])
+
         datasets[dataset_name] = LoadedDataset(
             name=dataset_name,
             references=reference_data,
@@ -213,7 +218,7 @@ def configure_service():
 @app.route("/iterate/<dataset>", methods=["POST"])
 def iterate(dataset: str):
     item = flask.request.json
-
+    
     global SERVICE
     if SERVICE is None:
         return "Internal Server Error: service not found", 500

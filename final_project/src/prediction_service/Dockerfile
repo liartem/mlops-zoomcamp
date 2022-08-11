@@ -13,6 +13,9 @@ RUN pip3 install -r requirements.txt
 
 RUN pip3 install evidently
 
-COPY ["predict.py", "rf.pkl", "./"]
+COPY app.py . 
+COPY rf.pkl .
 
-ENTRYPOINT ["gunicorn", "--bind=0.0.0.0:9696", "predict:app"]
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=9696"]
+
+# ENTRYPOINT ["gunicorn", "--bind=0.0.0.0:9696", "predict:app"]
