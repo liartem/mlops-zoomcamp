@@ -216,9 +216,8 @@ def configure_service():
 
 
 @app.route("/iterate/<dataset>", methods=["POST"])
-def iterate(dataset: str):
+def iterate(dataset):
     item = flask.request.json
-    
     global SERVICE
     if SERVICE is None:
         return "Internal Server Error: service not found", 500

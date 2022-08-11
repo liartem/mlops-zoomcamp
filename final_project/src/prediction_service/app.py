@@ -34,10 +34,10 @@ def make_encoding(object):
 def predict():
     object = request.get_json()
     print(f"object obtained = {object}")
-    object = make_encoding(object)
-    print(f"object after encoding = {object}")
+    object_enc = make_encoding(object)
+    print(f"object after encoding = {object_enc}")
 
-    object_dv = dv.transform(object)
+    object_dv = dv.transform(object_enc)
 
     print(f"object after dv = {object_dv}")
     pred = model.predict(object_dv)

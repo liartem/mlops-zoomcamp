@@ -6,15 +6,13 @@ datasets:
       numerical_features:
         - 'Age'
         - 'AnnualSalary'
-      target: 
-        - 'Purchased'
     data_format:
       header: true
       separator: ','
     monitors:
-      # - data_drift
-      - classification_performance
-      - cat_target_drift
+      - data_drift
+      # - classification_performance
+      # - cat_target_drift
     reference_file: ./datasets/car_data.csv
 service:
   calculation_period_sec: 2
