@@ -25,8 +25,9 @@ def save_model(model, dv):
 
 def make_label_encoding(df):
     encoder = LabelEncoder()
-    df["Gender"] = encoder.fit_transform(df["Gender"])
-    return df
+    df_encoded = df.copy()
+    df_encoded["Gender"] = encoder.fit_transform(df["Gender"])
+    return df_encoded
 
 def make_dict_victorizer(train_df, test_df):
     dv = DictVectorizer()
@@ -46,6 +47,10 @@ def calculate_metrics(model, X_test, test_target):
     metrics_dict = {"accuracy" : accuracy, "precision" : precision, "recall" : recall, "f1" : f1}
     return metrics_dict
 
+def save_test_dataset(df, test_target):
+    test_df = df.loc[test_target.index]
+    test_df.to_csv("./evidently_service/datasets/test.csv", index=False)
+    print("dataset is saved")
 
 mlflow.set_tracking_uri("sqlite:///final_project.db")
 mlflow.set_experiment("car-prediction-experiment")
@@ -54,13 +59,12 @@ if __name__ == '__main__':
     with mlflow.start_run():
 
         mlflow.set_tag("developer", "Artem")
-        
         df = pd.read_csv(r"../data/car_data.csv")
-        df = make_label_encoding(df)
-        X = df[["Gender", "Age", "AnnualSalary"]]
-        y = df["Purchased"]
-
+        df_encoded = make_label_encoding(df)
+        
         random_state = 42
+        X = df_encoded[["Gender", "Age", "AnnualSalary"]]
+        y = df_encoded["Purchased"]
         train_df, test_df, train_target, test_target = train_test_split(X, y, test_size = 0.33, random_state=random_state)
 
         mlflow.log_param("random state", random_state)
@@ -74,4 +78,6 @@ if __name__ == '__main__':
         mlflow.log_metrics(metrics_dict)
 
         save_model(model, dv)
+        save_test_dataset(df, test_target)
+
 

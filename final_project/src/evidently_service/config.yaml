@@ -13,7 +13,7 @@ datasets:
       - data_drift
       - classification_performance
       - cat_target_drift
-    reference_file: ./datasets/car_data.csv
+    reference_file: ./datasets/test.csv
 service:
   calculation_period_sec: 2
   min_reference_size: 30
