@@ -11,6 +11,8 @@ from sklearn.feature_extraction import DictVectorizer
 import matplotlib.pyplot as plt
 import pickle
 import mlflow
+from mlflow.tracking import MlflowClient
+from datetime import datetime
 
 
 
@@ -52,11 +54,13 @@ def save_test_dataset(df, test_target):
     test_df.to_csv("./evidently_service/datasets/test.csv", index=False)
     print("dataset is saved")
 
-mlflow.set_tracking_uri("sqlite:///final_project.db")
+
+MLFLOW_TRACKING_URI = f"sqlite:///final_project.db"
+mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
 mlflow.set_experiment("car-prediction-experiment")
 
 if __name__ == '__main__':
-    with mlflow.start_run():
+    with mlflow.start_run() as run:
 
         mlflow.set_tag("developer", "Artem")
         df = pd.read_csv(r"../data/car_data.csv")
@@ -78,6 +82,13 @@ if __name__ == '__main__':
         mlflow.log_metrics(metrics_dict)
 
         save_model(model, dv)
+        mlflow.sklearn.log_model(model, artifact_path="models")
+        mlflow.log_artifacts(local_dir="artifacts")
+        run_id = run.info.run_id
+        model_uri = f"runs:/{run_id}/model"
+        model_name= "car-prediction-model"
+        mlflow.register_model(model_uri=model_uri, name=model_name)
+
         save_test_dataset(df, test_target)
 
 

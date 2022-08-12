@@ -1,0 +1,12 @@
+channels:
+- conda-forge
+dependencies:
+- python=3.9.12
+- pip<=22.1.2
+- pip:
+  - mlflow
+  - cloudpickle==2.1.0
+  - dataclasses==0.6
+  - psutil==5.9.1
+  - scikit-learn==1.1.2
+name: mlflow-env
