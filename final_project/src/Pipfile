@@ -16,6 +16,7 @@ gunicorn = "*"
 pyarrow = "*"
 evidently = "*"
 pymongo = "*"
+prefect = "==2.b10"
 
 [dev-packages]
 requests = "*"
