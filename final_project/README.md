@@ -1,9 +1,21 @@
 Project
 <h1> Project description</h1>
 
-This is the implementation of final project for the course mlops-zoomcamp from DataTalksClub https://github.com/DataTalksClub/mlops-zoomcamp.
-The project provides the online service for the prediction of customers intention to buy a car. The dataset has been taken from kaggle: https://www.kaggle.com/code/ehetshamshaukat/car-purchase-decision-analysis-and-model/data.
-The main focus of the project is to make a **production** service with experiment tracking, pipeline automation, observability rather than building "the best" model for prediction. 
+This is the implementation of final project for the course mlops-zoomcamp from DataTalksClub https://github.com/DataTalksClub/mlops-zoomcamp. \
+The project provides the **online service** for the prediction of customers intention to buy a car. The dataset has been taken from kaggle: https://www.kaggle.com/code/ehetshamshaukat/car-purchase-decision-analysis-and-model/data. The given input features for the model are Gender, Age and AnnualSalary. In responce service give a prediction for a particular customer, whether he is intended to buy a car (1) or not (0). \
+The main focus of the project is to make a **production** service with experiment tracking, pipeline automation, observability rather than building "the best" model for prediction. \
+
+<h1> Technical details</h1>
+The project is implemented on Ubuntu 22.04 on Amazon AWS. The described steps for reproducbility are based on specific AWS configuration and may be different based on the production platform (GCP, Azure, locally, and so on). The instruction about reproducibility of a project can be found in how_to_reproduce.md file \
+This repository has 2 folders: *src* and *data*. The folder *data* contains the whole dataset for the given service. Due to the small size of dataset, it is located directly in git. In the folder *src* the man source code is provided with various configuration files for docker  and existing databases. \
+
+Mlflow is used as a main instrument for experiment tracking and model registry. The results of experiment are saved to the final_project.db in src folder. Also, the model registry is used for registering and the changing the stage of the models. \
+
+Prefect has been used as a main workflow orchestrator in this project. The training pipeline is automated and can be deployed with different time intervals. \
+
+The observability of the service is provided by combination of Grafana, Prometheus and Evidently. Is has information about the possible data drift, categorical target drift and should provide report for classification performance. \
+
+
 
 Run mlflow:
 mlflow ui --backend-store-uri sqlite:///final_project.db 
