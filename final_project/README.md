@@ -6,7 +6,7 @@ The main focus of the project is to make a **production** service with experimen
 
 <h1> Technical details</h1>
 The project is implemented on Ubuntu 22.04 on Amazon AWS. The described steps for reproducbility are based on specific AWS configuration and may be different based on the production platform (GCP, Azure, locally, and so on). The instruction about reproducibility of a project can be found in how_to_reproduce.md file <br/>
-This repository has 2 folders: *src* and *data*. The folder *data* contains the whole dataset for the given service. Due to the small size of dataset, it is located directly in git. In the folder *src* the man source code is provided with various configuration files for docker  and existing databases. <br/>
+This repository has 2 folders: _src_  and *data*. The folder *data* contains the whole dataset for the given service. Due to the small size of dataset, it is located directly in git. In the folder *src* the man source code is provided with various configuration files for docker  and existing databases. <br/>
 
 Mlflow is used as a main instrument for experiment tracking and model registry. The results of experiment are saved to the final_project.db in src folder. Also, the model registry is used for registering and the changing the stage of the models. <br/>
 
