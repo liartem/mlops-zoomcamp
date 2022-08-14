@@ -21,6 +21,9 @@ The small demo below aims to show the main functionality of a service. It starts
 ![demo ](https://user-images.githubusercontent.com/54916420/184533951-d26b2ede-da27-4e14-bebc-a8821daaba1b.gif)
 
 
+![system design](https://user-images.githubusercontent.com/54916420/184542992-5186f4d4-7992-46a2-9172-5e91aa78e3b9.jpg)
+
+
 Run mlflow:
 mlflow ui --backend-store-uri sqlite:///final_project.db 
 mlflow server --backend-store-uri sqlite:///final_project.db --default-artifact-root ./artifacts
