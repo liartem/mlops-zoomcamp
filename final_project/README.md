@@ -90,34 +90,35 @@ If mlflow shows error, such as <br/>
 
 The command should be run <br/>
 
-'''
+```
 pkill gunicorn
-'''
+```
 
 Also it can be helpful to clean the browser cash, such as <br/>
 
-'''
+```
 settings -> privacy and security -> clean cash
-'''
+```
 
 ##### Step 6
+
 This service has an automated workflow and Prefect is used as a main workflow orchestrator. In order to start Prefect, the followed commands should be written: 
-'''
+```
 prefect config set PREFECT_ORION_UI_API_URL="http://<external ip>:4200/api", where <external ip> is an ip address of a remote server
 prefect config set PREFECT_API_URL=http://0.0.0.0:4200/api
 prefect orion start --host 0.0.0.0
-'''
+```
 
 The deployment is managed in file *schedule_deployment.py*, originally it has a Cron schedule, but can be changed for different version. 
 
-'''
+```
 prefect deployment create schedule_deployment.py - deployment creation
-'''
+```
 
 then the work queue should be created, then prefect agent should pick the work queue by command: 
 
-'''
+```
 prefect agent start 5f5bfd27-2567-4989-8b34-c83f61f81684
-'''
+```
 
 
