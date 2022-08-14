@@ -14,6 +14,7 @@ Prefect has been used as a main workflow orchestrator in this project. The train
 
 The observability of the service is provided by combination of Grafana, Prometheus and Evidently. Is has information about the possible data drift, categorical target drift and should provide report for classification performance. <br/>
 
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/54916420/184533192-33769e34-cd17-44c0-82d5-7134239bbdc9.gif)
 
 
 Run mlflow:
