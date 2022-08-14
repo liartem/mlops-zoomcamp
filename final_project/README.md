@@ -7,6 +7,7 @@ The project provides the **online service** for the prediction of customers inte
 The main focus of the project is to make a **production** service with experiment tracking, pipeline automation, observability rather than building "the most accurate" prediction model. <br/>
 
 <h1> Technical details</h1>
+
 The project is implemented on Ubuntu 22.04 on Amazon AWS. The described steps for reproducbility are based on specific AWS configuration and may be different based on the production platform (GCP, Azure, locally, and so on). The instruction about reproducibility of a project can be found in **how to reproduce** section <br/>
 This repository has 2 folders: _src_  and _data_. The folder *data* contains the whole dataset for the given service. Due to the small size of dataset, it is located directly in git. In the folder *src* the man source code is provided with various configuration files for docker and existing databases. <br/>
 
@@ -60,8 +61,50 @@ http://localhost:3000/
 Ideally, all given metrics should be updated in real time with providing additional information. <br/>
 Hint: do not forgot to make a port mapping. 
 
-![port mapping](https://user-images.githubusercontent.com/54916420/184546076-e465e10e-3692-4d2c-958a-1697bcc6eea6.png)
+![port mapping](https://user-images.githubusercontent.com/54916420/184546076-e465e10e-3692-4d2c-958a-1697bcc6eea6.png) <br/>
 Steps 2-4 are shown in the presented demo. 
+
+##### Step 5
+All previous steps are used for **starting** the service, in order to **change** some parts of a service or prove its functionality, the steps described below can be run.
+For example, training the new model can be done by running 
+
+```
+python train.py
+```
+This script takes the input data, randomly choose random state, performs train test split, make a encoding of categorical feature (Gender), save dictionary vectorizer and model.pkl files. Since model training happends every time on a similar dataset, there should be a small difference in performance metrics. <br/>
+In order to see experiment tracking, MlFlow should be started by: 
+
+```
+mlflow server --backend-store-uri sqlite:///final_project.db --default-artifact-root ./artifacts
+```
+The user interface can be achieved on: 
+```
+http://localhost:5000/
+```
+If mlflow shows error, such as 
+'''
+[2022-08-13 09:57:37 +0000] [17633] [ERROR] Connection in use: ('127.0.0.1', 5000)
+[2022-08-13 09:57:37 +0000] [17633] [ERROR] Retrying in 1 second.
+'''
+The command should be run
+'''
+pkill gunicorn
+'''
+Also it can be helpful to clean the browser cash, such as 
+'''
+settings -> privacy and security -> clean cash
+'''
+
+##### Step 6
+This service has an automated workflow and Prefect(https://www.prefect.io/) is used as a main workflow orchestrator. In order to start Prefect, the followed commands should be written: 
+'''
+prefect config set PREFECT_ORION_UI_API_URL="http://35.172.212.237:4200/api", where 35.172.212.237 is an ip address of remote server
+prefect config set PREFECT_API_URL=http://0.0.0.0:4200/api
+prefect orion start --host 0.0.0.0
+'''
+
+The deployment is managed in file *schedule_deployment.py*, originally it has a Cron schedule, but can be changed for different version. 
+
 
 <h1> How to reproduce </h1>
 
