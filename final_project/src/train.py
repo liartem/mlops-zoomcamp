@@ -24,11 +24,17 @@ def train_model(train_df, train_target):
 
 @task
 def save_model(model, dv):
+    '''
+    Saves the new version of a model to the prediction_service/model.pkl
+    '''
     with open('prediction_service/model.pkl', 'wb') as f_out:
         pickle.dump((dv,model), f_out)
 
-@task
 def make_label_encoding(df):
+    '''
+    Makes label encoding for categorical feature,
+    returns 1 when Gender == "Male" and 0 when "Female"
+    '''
     encoder = LabelEncoder()
     df_encoded = df.copy()
     df_encoded["Gender"] = encoder.fit_transform(df["Gender"])
@@ -36,6 +42,9 @@ def make_label_encoding(df):
 
 @task
 def make_dict_victorizer(train_df, test_df):
+    '''
+    Uses dictionary vectorizer for processing the dictionaries
+    '''
     dv = DictVectorizer()
     train_dicts = train_df.to_dict(orient='records')
     X_train = dv.fit_transform(train_dicts)
@@ -46,6 +55,9 @@ def make_dict_victorizer(train_df, test_df):
 
 @task
 def calculate_metrics(model, X_test, test_target):
+    '''
+    Calculates the accuracy, precision, recall and f1 score metrics for a test data
+    '''
     y_pred_test = model.predict(X_test)
     accuracy = accuracy_score(test_target, y_pred_test)
     precision = precision_score(test_target, y_pred_test) 
@@ -56,6 +68,9 @@ def calculate_metrics(model, X_test, test_target):
 
 @task
 def save_test_dataset(df, test_target):
+    '''
+    Rewrites test dataset in ./evidently_service/datasets/
+    '''
     test_df = df.loc[test_target.index]
     test_df.to_csv("./evidently_service/datasets/test.csv", index=False)
     print("dataset is saved")

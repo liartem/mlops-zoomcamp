@@ -21,6 +21,7 @@ class DateTimeEncoder(json.JSONEncoder):
 
 with open("target.csv", 'w') as f_target:
     for row in data:
+        # sends the data to the prediction service with 1 second pause
         f_target.write(f"{row['User ID']},{row['Purchased']}\n")
         resp = requests.post("http://127.0.0.1:9696/predict",
                             headers={"Content-Type": "application/json"},
