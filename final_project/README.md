@@ -12,6 +12,9 @@ The project is implemented on Ubuntu 22.04 on Amazon AWS. The described steps fo
 
 This repository has 2 folders: *src*  and *data*. The folder *data* contains the whole dataset for the given service. Due to the small size of dataset, it is located directly in git. In the folder *src* the main source code is provided with various configuration files for docker and existing databases. <br/>
 
+### High-level overview
+
+
 The picture with "system design" can be used in order to understand the working schema of a current project. <br/>
 The script *train.py* is used as a main code for fetching the input data, creating of a model, promoting it to the model registry and saving as pickle file. [Mlflow](https://mlflow.org/) is used as a main instrument for experiment tracking and model registry. The results of experiment are saved to the final_project.db. <br/>
 
