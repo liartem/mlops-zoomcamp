@@ -6,17 +6,20 @@ This is the implementation of final project for the course mlops-zoomcamp from [
 The project provides the **online service** for the prediction of customers intention to buy a car. The dataset has been taken from [kaggle](https://www.kaggle.com/code/ehetshamshaukat/car-purchase-decision-analysis-and-model/data). Let's imagine that the aim is to predict a customer's intention to buy a car. The given input features for the model are Gender, Age and AnnualSalary. In responce service give a prediction for a particular customer, whether he is intended to buy a car (1) or not (0). <br/>
 The main focus of the project is to make a **production** service with experiment tracking, pipeline automation, observability rather than building "the most accurate" prediction model. <br/>
 
-<h1> Technical details</h1>
+<h1> Technical details and high-level overview</h1>
 
 The project is implemented on Ubuntu 22.04 on Amazon AWS. The described steps for reproducbility are based on specific AWS configuration and may be different based on the production platform (GCP, Azure, locally, and so on). The instruction about reproducibility of a project can be found in actual readme. <br/>
 
-This repository has 2 folders: *src*  and *data*. The folder *data* contains the whole dataset for the given service. Due to the small size of dataset, it is located directly in git. In the folder *src* the man source code is provided with various configuration files for docker and existing databases. <br/>
+This repository has 2 folders: *src*  and *data*. The folder *data* contains the whole dataset for the given service. Due to the small size of dataset, it is located directly in git. In the folder *src* the main source code is provided with various configuration files for docker and existing databases. <br/>
 
-[Mlflow](https://mlflow.org/) is used as a main instrument for experiment tracking and model registry. The results of experiment are saved to the final_project.db. Also, the model registry is used for registering and the changing the stage of the models. <br/>
+The picture with "system design" can be used in order to understand the working schema of a current project. <br/>
+The script *train.py* is used as a main code for fetching the input data, creating of a model, promoting it to the model registry and saving as pickle file. [Mlflow](https://mlflow.org/) is used as a main instrument for experiment tracking and model registry. The results of experiment are saved to the final_project.db. <br/>
 
-[Prefect](https://www.prefect.io/) has been used as a main workflow orchestrator in this project. The training pipeline is automated and can be deployed with different time intervals. <br/>
+The script *schedule_deployment.py* is used for the scheduling the deployment of a model. [Prefect](https://www.prefect.io/) has been used as a main workflow orchestrator in this project. The training pipeline is automated and can be deployed with different time intervals. <br/>
 
-The observability of the service is provided by combination of [Grafana](https://grafana.com/), [Prometheus](https://prometheus.io/) and [Evidently](https://github.com/evidentlyai). Is has information about the possible data drift, categorical target drift and should provide report for classification performance. <br/>
+After the model is trained, the whole application can be started by running docker compose file (see step 3). It runs the Flask application  with a service that has current model and ensures observability by a combination of [Grafana](https://grafana.com/), [Prometheus](https://prometheus.io/) and [Evidently](https://github.com/evidentlyai). Is provides information in real time about the possible model's performance, such as data drift and categorical target drift.
+
+The simulation of traffic is done in *send_data.py* script. It sends input features in JSON format, such as Gender, Age and AnnualSalary to the service with time difference of 1 second. In responce, service gives an prediction for a given customer about his intention to buy a car (1) or not (0).
 
 <h1> Demo </h1>
 
