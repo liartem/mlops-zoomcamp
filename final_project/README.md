@@ -46,7 +46,7 @@ Navigate into the *src* repository and run:
 ```
 pipenv shell
 ```
-It should install all required dependencies and activate the working environment. 
+It should install all required dependencies and activate the working environment. **scr environment should be activated always when running some commands**
 
 ##### Step 3
 After the pipenv environment is activated, the whole application can be started by running 
