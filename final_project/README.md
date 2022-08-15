@@ -14,7 +14,6 @@ This repository has 2 folders: *src*  and *data*. The folder *data* contains the
 
 ### High-level overview
 
-
 *The picture with "system design" can be used in order to understand the working schema of a current project.* <br/>
 
 The script *train.py* is used as a main code for fetching the input data, creating of a model, promoting it to the model registry and saving as pickle file. [Mlflow](https://mlflow.org/) is used as a main instrument for experiment tracking and model registry. The results of experiment are saved to the final_project.db. <br/>
