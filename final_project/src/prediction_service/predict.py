@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import LabelEncoder
 
 
-with open('rf.pkl', 'rb') as f_in:
+with open('model.pkl', 'rb') as f_in:
     (dv, model) = pickle.load(f_in)
 
 

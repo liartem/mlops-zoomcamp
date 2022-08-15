@@ -24,7 +24,7 @@ def train_model(train_df, train_target):
 
 @task
 def save_model(model, dv):
-    with open('model.pkl', 'wb') as f_out:
+    with open('prediction_service/model.pkl', 'wb') as f_out:
         pickle.dump((dv,model), f_out)
 
 @task
@@ -61,7 +61,7 @@ def save_test_dataset(df, test_target):
     print("dataset is saved")
 
 
-MLFLOW_TRACKING_URI = "sqlite:///final_project1.db"
+MLFLOW_TRACKING_URI = "sqlite:///final_project.db"
 mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
 mlflow.set_experiment("car-prediction-experiment")
 

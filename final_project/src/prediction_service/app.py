@@ -9,7 +9,7 @@ from flask import jsonify
 from pymongo import MongoClient
 
 
-MODEL_FILE = os.getenv('MODEL_FILE', 'rf.pkl')
+MODEL_FILE = os.getenv('MODEL_FILE', 'model.pkl')
 
 EVIDENTLY_SERVICE_ADDRESS = os.getenv('EVIDENTLY_SERVICE', 'http://127.0.0.1:5000')
 MONGODB_ADDRESS = os.getenv("MONGODB_ADDRESS", "mongodb://127.0.0.1:27017")
