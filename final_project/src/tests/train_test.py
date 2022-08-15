@@ -11,8 +11,9 @@ def test_make_label_encoding():
     '''
     row = pd.DataFrame({"Gender": "Male", "Age": 20, "AnnualSalary": 1000}, index=[0])
     actual_result = make_label_encoding(row)
-    
-    expected_result = pd.DataFrame({"Gender": 0, "Age": 20, "AnnualSalary": 1000}, index=[0])
-    assertion = assert_frame_equal(actual_result,  expected_result)
-    assert None is assertion
 
+    expected_result = pd.DataFrame(
+        {"Gender": 0, "Age": 20, "AnnualSalary": 1000}, index=[0]
+    )
+    assertion = assert_frame_equal(actual_result, expected_result)
+    assert assertion is None
