@@ -1,5 +1,4 @@
 import json
-import uuid
 from datetime import datetime
 from time import sleep
 import pyarrow as pa

@@ -1,7 +1,5 @@
 import pandas as pd
 import numpy as np
-import os
-import sys
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder, StandardScaler
@@ -63,12 +61,12 @@ def save_test_dataset(df, test_target):
     print("dataset is saved")
 
 
-MLFLOW_TRACKING_URI = "sqlite:///final_project.db"
+MLFLOW_TRACKING_URI = "sqlite:///final_project1.db"
 mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
 mlflow.set_experiment("car-prediction-experiment")
 
 @flow(task_runner=SequentialTaskRunner())
-def main():
+def run():
     with mlflow.start_run() as run:
 
         client = MlflowClient(tracking_uri=MLFLOW_TRACKING_URI)
@@ -111,7 +109,7 @@ def main():
 
             
 if __name__ == '__main__':
-    main()
+    run()
     
 
 

@@ -17,9 +17,12 @@ pyarrow = "*"
 evidently = "*"
 pymongo = "*"
 prefect = "==2.b10"
+pylint = "*"
 
 [dev-packages]
 requests = "*"
+black = "*"
+isort = "*"
 
 [requires]
 python_version = "3.9"
