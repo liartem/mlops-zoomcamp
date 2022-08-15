@@ -129,3 +129,15 @@ prefect agent start 5f5bfd27-2567-4989-8b34-c83f61f81684
 ```
 where the 5f5bfd27-2567-4989-8b34-c83f61f81684 is a unique identifier of a queue
 
+
+# Possibility for improvement
+
+The current project has some orroptunities foe improvements, for example: <br/>
+
+1) Makes a full pipeline automation. For the time of submission (15.08.2022) the service starts with the help of docker-compose. Ideally when the new model is trained,  the new image should be build automatically build and deployed. <br/>
+
+2) Add CI/CD pipeline. 
+
+3) Add IaC
+
+4) Add the possibility to retrain the model, when the data/target drift are detected. 
