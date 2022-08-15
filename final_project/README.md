@@ -15,7 +15,8 @@ This repository has 2 folders: *src*  and *data*. The folder *data* contains the
 ### High-level overview
 
 
-The picture with "system design" can be used in order to understand the working schema of a current project. <br/>
+*The picture with "system design" can be used in order to understand the working schema of a current project.* <br/>
+
 The script *train.py* is used as a main code for fetching the input data, creating of a model, promoting it to the model registry and saving as pickle file. [Mlflow](https://mlflow.org/) is used as a main instrument for experiment tracking and model registry. The results of experiment are saved to the final_project.db. <br/>
 
 The script *schedule_deployment.py* is used for the scheduling the deployment of a model. [Prefect](https://www.prefect.io/) has been used as a main workflow orchestrator in this project. The training pipeline is automated and can be deployed with different time intervals. <br/>
@@ -118,13 +119,13 @@ prefect orion start --host 0.0.0.0
 The deployment is managed in file *schedule_deployment.py*, originally it has a Cron schedule, but can be changed for different version. 
 
 ```
-prefect deployment create schedule_deployment.py - deployment creation
+prefect deployment create schedule_deployment.py 
 ```
 
 then the work queue should be created, then prefect agent should pick the work queue by command: 
 
 ```
-prefect agent start 5f5bfd27-2567-4989-8b34-c83f61f81684
+prefect agent start 5f5bfd27-2567-4989-8b34-c83f61f81684 
 ```
-
+where the 5f5bfd27-2567-4989-8b34-c83f61f81684 is a unique identifier of a queue
 
