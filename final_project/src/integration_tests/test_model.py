@@ -19,7 +19,7 @@ def integration_test():
     response = requests.post(URL, json=row)
 
     actual_response = response.json()
-    print(actual_response)
+    print(actual_response, "integration test has been past")
 
     expected_response = {'car-prediction': 0.0}
     assert expected_response == actual_response
