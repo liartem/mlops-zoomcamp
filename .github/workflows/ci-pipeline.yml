@@ -25,11 +25,6 @@ jobs:
         working-directory: "final_project/src"
         run: pipenv run pytest .
 
-      - name: Lint
-        working-directory: "final_project/src"
-        run: pipenv run pylint -d duplicate-code --recursive=y .
-
-
       - name: Integration Test
         working-directory: 'final_project/src/integraton-tests'
         run: |
