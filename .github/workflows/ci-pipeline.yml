@@ -1,4 +1,4 @@
-name: CI-Tests
+name: CI-pipeline
 on:
   push:
     branches:
@@ -31,6 +31,6 @@ jobs:
 
 
       - name: Integration Test
-        working-directory: 'final_project/src/integraton-test'
+        working-directory: 'final_project/src/integraton-tests'
         run: |
           . run.sh
