@@ -28,4 +28,4 @@ jobs:
       - name: Integration Test
         working-directory: 'final_project/src/integraton_tests'
         run: |
-          . run.sh
+          ./run.sh

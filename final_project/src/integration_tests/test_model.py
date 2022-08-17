@@ -7,7 +7,7 @@ def integration_test():
     Test a model.pkl from src/prediction_service/predict.py
     raise an AssertionError if the prediction isn't correct
     Hint: it starts by a different dockerfile located in current directory
-    '''
+    ''' 
 
     row = {
             "Gender": "Male",
