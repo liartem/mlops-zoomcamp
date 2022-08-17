@@ -23,7 +23,7 @@ jobs:
 
       - name: Run Unit tests
         working-directory: "final_project/src"
-        run: pipenv run pytest tests/
+        run: pipenv run pytest .
 
       - name: Lint
         working-directory: "final_project/src"
