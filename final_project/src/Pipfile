@@ -18,6 +18,7 @@ evidently = "*"
 pymongo = "*"
 prefect = "==2.b10"
 pylint = "*"
+pytest = "*"
 
 [dev-packages]
 requests = "*"
