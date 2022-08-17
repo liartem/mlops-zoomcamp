@@ -27,7 +27,7 @@ jobs:
 
       - name: Lint
         working-directory: "final_project/src"
-        run: pipenv run pylint --recursive=y .
+        run: pipenv run pylint -d duplicate-code --recursive=y .
 
 
       - name: Integration Test
