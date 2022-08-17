@@ -1,0 +1,8 @@
+version : '3.7'
+services:
+  test-model:
+    build: 
+      context: ../prediction_service
+      dockerfile: /home/ubuntu/mlops-zoomcamp/final_project/src/integration_tests/Dockerfile
+    ports:
+      - "9696:9696"
