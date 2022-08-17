@@ -18,4 +18,4 @@ COPY model.pkl .
 
 CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=9696"]
 
-# ENTRYPOINT ["gunicorn", "--bind=0.0.0.0:9696", "predict:app"]
+#ENTRYPOINT ["gunicorn", "--bind=0.0.0.0:9696", "predict:app"]

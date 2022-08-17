@@ -1,9 +1,7 @@
 import pickle
 import pandas as pd
-from sklearn.metrics import mean_absolute_error
 from flask import Flask, request, jsonify
-import matplotlib.pyplot as plt
-from sklearn.preprocessing import LabelEncoder
+
 
 
 with open('model.pkl', 'rb') as f_in:
