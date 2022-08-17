@@ -1,0 +1,36 @@
+name: CI-Tests
+on:
+  pull_request:
+    branches:
+      - 'main'
+    paths:
+      - 'final_project/src/**'
+
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        working-directory: "final_project/src"
+        run: pip install pipenv && pipenv install --dev
+
+      - name: Run Unit tests
+        working-directory: "final_project/src"
+        run: pipenv run pytest tests/
+
+      - name: Lint
+        working-directory: "final_project/src"
+        run: pipenv run pylint --recursive=y .
+
+
+      - name: Integration Test
+        working-directory: 'final_project/src/integraton-test'
+        run: |
+          . run.sh
