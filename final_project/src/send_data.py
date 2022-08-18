@@ -9,7 +9,7 @@ import requests
 
 table = pd.read_csv("./evidently_service/datasets/test.csv")
 table = pa.Table.from_pandas(table, preserve_index=True)
-data  = table.to_pylist() 
+data  = table.to_pylist()
 
 
 class DateTimeEncoder(json.JSONEncoder):
