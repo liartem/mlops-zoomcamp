@@ -6,6 +6,7 @@ on:
   pull_request:
     branches: [ "main" ]
 
+
 jobs:
 
   build:
@@ -20,6 +21,7 @@ jobs:
         username: ${{secrets.DOCKER_USERNAME}}
         password: ${{secrets.DOCKER_PASSWORD}}
     - name: docker compose build
+      working-directory: 'final_project/src'
       run : docker-compose build
     - name: docker compose push
       run : docker-compose push
