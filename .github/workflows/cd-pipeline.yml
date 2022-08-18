@@ -24,4 +24,5 @@ jobs:
       working-directory: 'final_project/src'
       run : docker-compose build
     - name: docker compose push
+      working-directory: 'final_project/src'
       run : docker-compose push
