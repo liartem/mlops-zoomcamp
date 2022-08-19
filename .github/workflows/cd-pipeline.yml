@@ -31,6 +31,6 @@ jobs:
         id: docker_build
         working-directory: final_project/src/prediction_service
         run: |
-            docker build -t ${secrets.DOCKER_USERNAME}/car-service:latest .
-            docker push ${secrets.DOCKER_USERNAME}/car-service:latest
+            docker build -t ${{ secrets.DOCKER_USERNAME }}/car-service:latest .
+            docker push ${{ secrets.DOCKER_USERNAME }}/car-service:latest
 
