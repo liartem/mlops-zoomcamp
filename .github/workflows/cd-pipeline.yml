@@ -32,5 +32,5 @@ jobs:
         working-directory: final_project/src/prediction_service
         run: |
             docker build -t car-service:latest .
-            docker push §secrets.DOCKER_USERNAME/car-service:latest
+            docker push leeartem95/car-service:latest
 
