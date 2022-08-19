@@ -26,11 +26,17 @@ jobs:
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v1
-
-      - name: Build and push
-        id: docker_build
+        
+      - name: Build 
         working-directory: final_project/src/prediction_service
-        run: |
-            docker build -t leeartem95/car-service:latest .
-            docker push leeartem95/car-service:latest
+        run: docker build -t car_service:latest .
+      
+      - name: Push
+        uses: mr-smithers-excellent/docker-build-push@v4
+        with: 
+          image: leeartem/car_service:latest
+          registry: docker.io
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
 
