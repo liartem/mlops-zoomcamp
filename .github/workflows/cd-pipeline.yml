@@ -32,7 +32,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: final_project/src
-          file: ./docker-compose.yml
+          file: ./prediction_service/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/car_prediction:latest
 
