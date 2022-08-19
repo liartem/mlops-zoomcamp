@@ -24,10 +24,6 @@ jobs:
 
     - name: Build and push
       working-directory: 'final_project/src'
-      commands:
-          # Authenticate with Docker Hub
-          - echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
-          - checkout
-          - docker-compose build
-          - docker tag car-prediction:latest "$DOCKER_USERNAME"/car-prediction:latest
-          - docker push "$DOCKER_USERNAME"/car-prediction:latest
+      run: docker-compose build
+           docker tag car-prediction:latest "$DOCKER_USERNAME"/car-prediction:latest
+           docker-compose push "$DOCKER_USERNAME"/car-prediction:latest
