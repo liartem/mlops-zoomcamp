@@ -30,7 +30,7 @@ jobs:
       - name: Build and push
         id: docker_build
         working-directory: final_project/src/prediction_service
-        run: 
-            docker build -t car_service .
-            docker push §DOCKER_USERNAME/car_service:latest
+        run: |
+            docker build .
+            docker push §DOCKER_USERNAME
 
