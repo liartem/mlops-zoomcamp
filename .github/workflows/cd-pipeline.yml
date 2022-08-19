@@ -31,8 +31,8 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: final_project/src
-          file: ./prediction_service/Dockerfile
+          context: final_project/src/prediction_service
+          file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/car_prediction:latest
 
