@@ -29,12 +29,11 @@ jobs:
         
       - name: Build 
         working-directory: final_project/src/prediction_service/
-        run: docker build -t car_service .
+        run: docker build -t car_service:latest .
       
       - name: Push
         uses: docker/build-push-action@v2
         with: 
-          image: leeartem/car_service
           registry: docker.io
           coontext: .
           push: True
