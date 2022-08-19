@@ -27,6 +27,6 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: 'final_project/src'
-        file: ./Dockerfile
+        file: ./docker-compose.yml
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/simplewhale:latest
+        tags: ${{ secrets.DOCKER_USERNAME }}/final_project:latest
