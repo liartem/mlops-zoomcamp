@@ -31,6 +31,6 @@ jobs:
         id: docker_build
         working-directory: final_project/src/prediction_service
         run: |
-            docker build -t car-service:latest .
+            docker build -t leeartem95/car-service:latest .
             docker push leeartem95/car-service:latest
 
