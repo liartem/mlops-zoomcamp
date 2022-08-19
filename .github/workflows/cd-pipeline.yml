@@ -25,5 +25,4 @@ jobs:
     - name: Build and push
       working-directory: 'final_project/src'
       run: docker-compose build
-           docker tag car-prediction:latest "$DOCKER_USERNAME"/car-prediction:latest
            docker-compose push "$DOCKER_USERNAME"/car-prediction:latest
