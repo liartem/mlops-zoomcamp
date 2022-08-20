@@ -135,8 +135,6 @@ The current project has some oppoptunities for improvements, for example: <br/>
 
 1) Makes a full pipeline automation. For the time of submission (15.08.2022) the service starts with the help of docker-compose. Ideally when the new model is trained,  the new image should be build automatically build and deployed. <br/>
 
-2) Add CI/CD pipeline. 
+2) Add IaC
 
-3) Add IaC
-
-4) Add the possibility to retrain the model, when the data/target drift are detected. 
+3) Add the possibility to retrain the model, when the data/target drift are detected. 
