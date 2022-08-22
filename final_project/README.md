@@ -8,9 +8,9 @@ The main focus of the project is to make a **production** service with experimen
 
 <h1> Technical details and high-level overview</h1>
 
-The project is implemented on Ubuntu 22.04 on Amazon AWS. The described steps for reproducbility are based on specific AWS configuration and may be different based on the production platform (GCP, Azure, locally, and so on). The instruction about reproducibility of a project can be found in actual readme. <br/>
+The project is implemented on Ubuntu 22.04 on Amazon AWS. The described steps for reproducbility are based on specific AWS configuration and may be different based on the production platform (GCP, Azure, locally, and so on). The instruction about reproducibility of a project can be found in the actual readme. <br/>
 
-This repository has 2 folders: *src*  and *data*. The folder *data* contains the whole dataset for the given service. Due to the small size of dataset, it is located directly in git. In the folder *src* the main source code is provided with various configuration files for docker and existing databases. <br/>
+This repository has 2 folders: *src*  and *data*. The folder *data* contains the whole dataset for the given service. Due to the small size of dataset, it is located directly in git. In the folder *src* the main source code is provided with various configuration files for docker and existing databases. The folder *.github/workflow" of the CORE directory contains the configuration files for CI/CD pipeline. CI pipeline makes unit and integration tests (linters were disabled), CD pipeline makes a image of application and pushed it to docker hub. <br/>
 
 ### High-level overview
 
@@ -133,8 +133,7 @@ where the 5f5bfd27-2567-4989-8b34-c83f61f81684 is a unique identifier of a queue
 
 The current project has some oppoptunities for improvements, for example: <br/>
 
-1) Makes a full pipeline automation. For the time of submission (15.08.2022) the service starts with the help of docker-compose. Ideally when the new model is trained,  the new image should be build automatically build and deployed. <br/>
+1) Add the possibility to retrain the model and send an alert, when the data/target drift are detected. 
 
 2) Add IaC
 
-3) Add the possibility to retrain the model, when the data/target drift are detected. 
