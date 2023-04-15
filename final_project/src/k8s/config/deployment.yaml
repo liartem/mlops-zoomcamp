@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-pred-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deployment-pred-service
+  template:
+    metadata:
+      labels:
+        app: deployment-pred-service
+    spec:
+      containers:
+      - name: deployment-pred-service
+        image: 971174068661.dkr.ecr.eu-west-1.amazonaws.com/mlops-images:v001
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 9696
