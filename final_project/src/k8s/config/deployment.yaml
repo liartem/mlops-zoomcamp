@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: deployment-pred-service
-        image: 971174068661.dkr.ecr.eu-west-1.amazonaws.com/mlops-images:v001
+        image: 971174068661.dkr.ecr.eu-west-1.amazonaws.com/mlops-images:prediction-service-v001
         resources:
           limits:
             memory: "128Mi"
